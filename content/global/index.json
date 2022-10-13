@@ -1,0 +1,37 @@
+{
+  "header": {
+    "iconMenu": {
+      "size": "sm",
+      "name": "menu"
+    },
+    "iconClose": {
+      "size": "sm",
+      "name": "close"
+    }
+  },
+  "footer": {
+    "links": [
+      {
+        "href": "",
+        "label": "Inicio"
+      }
+    ],
+    "social": [
+      {
+        "href": "https://www.instagram.com/iamasync/",
+        "label": "Instagram"
+      },
+      {
+        "href": "https://github.com/ansango/",
+        "label": "Github"
+      }
+    ]
+  },
+  "theme": {
+    "mono": "neutral",
+    "color": "neutral",
+    "font": "work-sans",
+    "icon": "hi",
+    "darkMode": "light"
+  }
+}
