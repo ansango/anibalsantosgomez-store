@@ -1,5 +1,4 @@
 import { Components, TinaMarkdown } from "tinacms/dist/rich-text";
-import { type SerieProps } from "../../series/serie";
 import { type FC, type ReactNode } from "react";
 import { Container } from "../../util/container";
 import { Section } from "../../util/section";
@@ -93,7 +92,7 @@ export const components: Components<{
 };
 
 export const Content: FC<{
-  body: SerieProps["body"];
+  body: any;
   parentField?: string;
 }> = ({ body }) => {
   return <TinaMarkdown content={body} components={components} />;

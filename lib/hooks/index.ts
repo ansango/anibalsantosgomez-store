@@ -1,5 +1,3 @@
-export * from "./queries";
-
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useRef, useState } from "react";
 
