@@ -3,6 +3,11 @@ import TinaProvider from "../.tina/components/TinaDynamicProvider";
 import { GoogleAnalytics } from "nextjs-google-analytics";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import { DefaultSeo, type DefaultSeoProps } from "next-seo";
+import { SessionProvider, useSession } from "next-auth/react";
+import { AppProps } from "next/app";
+import { Session } from "next-auth";
+import { NextComponentType } from "next";
+import { ReactNode } from "react";
 
 const defaultSeoProps: DefaultSeoProps = {
   title: "Film Captures",
@@ -67,7 +72,24 @@ const defaultSeoProps: DefaultSeoProps = {
   },
 };
 
-const App = ({ Component, pageProps }) => {
+function Auth({ children }: { children: ReactNode }) {
+  const { status } = useSession({ required: true });
+
+  if (status === "loading") {
+    return <></>;
+  }
+
+  return <>{children}</>;
+}
+
+type CustomAppProps = AppProps<{ session: Session }> & {
+  Component: NextComponentType & { auth?: boolean };
+};
+
+const App = ({
+  Component,
+  pageProps: { session, ...pageProps },
+}: CustomAppProps) => {
   return (
     <GoogleReCaptchaProvider
       reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
@@ -82,7 +104,15 @@ const App = ({ Component, pageProps }) => {
       <DefaultSeo {...defaultSeoProps} />
       <GoogleAnalytics trackPageViews strategy="lazyOnload" />
       <TinaProvider>
-        <Component {...pageProps} />
+        <SessionProvider session={session}>
+          {Component.auth ? (
+            <Auth>
+              <Component {...pageProps} />
+            </Auth>
+          ) : (
+            <Component {...pageProps} />
+          )}
+        </SessionProvider>
       </TinaProvider>
     </GoogleReCaptchaProvider>
   );

@@ -4,6 +4,7 @@ import {
   RouteMappingPlugin,
   TinaField,
 } from "tinacms";
+import { DocumentCreatorArgs } from "tinacms/dist/hooks/use-content-creator";
 import {
   contentBlockSchema,
   contactFormSchema,
@@ -29,6 +30,7 @@ const schema = defineSchema({
       },
     },
   },
+
   collections: [
     {
       label: "Pages",
@@ -363,6 +365,8 @@ const schema = defineSchema({
   ],
 });
 
+const a: DocumentCreatorArgs = {};
+
 export const tinaConfig = defineConfig({
   client,
   schema,
@@ -378,12 +382,6 @@ export const tinaConfig = defineConfig({
       if (["page"].includes(collection.name)) {
         if (document._sys.filename === "home") {
           return `/`;
-        }
-        if (document._sys.filename === "about") {
-          return `/about`;
-        }
-        if (document._sys.filename === "series") {
-          return `/series`;
         }
         return undefined;
       }

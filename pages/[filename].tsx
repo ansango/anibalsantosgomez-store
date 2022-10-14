@@ -4,6 +4,7 @@ import { Layout } from "../components/layout";
 import { client } from "../.tina/__generated__/client";
 import { motion } from "framer-motion";
 import { NextSeoProps } from "next-seo";
+
 export default function NextPage(
   props: AsyncReturnType<typeof getStaticProps>["props"]
 ) {
@@ -35,7 +36,6 @@ export default function NextPage(
       description: page?.seo?.description,
     },
   };
-
   return (
     <Layout rawData={data} data={data.global} seo={seoProps}>
       <motion.article

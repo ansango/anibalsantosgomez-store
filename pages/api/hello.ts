@@ -1,11 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { createRouter } from "next-connect";
-import { corsMiddleware, customErrors } from "../../lib/api";
+import { corsMiddleware, customErrors,  sessionMiddleware } from "../../lib/api";
 
 const router = createRouter<NextApiRequest, NextApiResponse>();
 
 router
   .use(corsMiddleware)
+  .use(sessionMiddleware)
   .use(async (req, res, next) => {
     const start = Date.now();
     await next(); // call next in chain
