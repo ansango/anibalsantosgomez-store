@@ -40,15 +40,15 @@ export const Gallery = () => {
             products.map((product, i) => (
               <Link key={i} passHref href={`/product/${product._sys.filename}`}>
                 <a
-                  className="p-5 2xl:p-10 aspect-square flex items-center justify-center relative"
+                  className="p-5 2xl:p-10 aspect-square flex items-center justify-center relative overflow-hidden"
                   style={{
                     backgroundImage: `url('${img.src}')`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
                 >
-                  <div>
-                    <div className="p-1 bg-white sm:p-2 lg:p-5">
+                  <div className="h-full w-full">
+                    <div className="p-1 bg-white sm:p-2 lg:p-5 h-full">
                       <Image url={product.cover} />
                     </div>
                   </div>

@@ -155,7 +155,7 @@ export const Image: FC<ImageProps> = ({
     <>
       {url ? (
         <motion.span
-          className={`relative flex flex-col items-center justify-center ${
+          className={`relative flex flex-col items-center justify-center h-full ${
             onClick ? "cursor-pointer" : ""
           }`}
           data-tinafield={`${parentField}.image`}
@@ -166,7 +166,7 @@ export const Image: FC<ImageProps> = ({
           onClick={onClick}
         >
           <img
-            className={`object-cover ${centerCn} w-full ${aRatio} ${
+            className={`object-cover ${centerCn} w-full ${aRatio} h-full ${
               onClick &&
               `hover:opacity-80 group-hover:opacity-80 transition-all duration-300`
             }`}
