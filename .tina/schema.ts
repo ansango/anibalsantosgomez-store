@@ -14,6 +14,7 @@ import {
 } from "../components/blocks/";
 import { iconSchema } from "../components/util/icon";
 import { cameras, films } from "../constants";
+import { kebabCase } from "../lib/utils";
 
 import { client } from "./__generated__/client";
 
@@ -36,11 +37,22 @@ const schema = defineSchema({
   collections: [
     {
       label: "Products",
-      name: "products",
+      name: "product",
       path: "content/products",
       format: "mdx",
-      ui: {},
-      defaultItem: () => ({}),
+      ui: {
+        filename: {
+          readonly: true,
+          slugify: ({ title, sequence }) => {
+            return title && sequence ? kebabCase(`${sequence}-${title}`) : "";
+          },
+        },
+      },
+      defaultItem: () => ({
+        title: "",
+        sequence: "",
+        description: "",
+      }),
       fields: [
         {
           name: "seo",

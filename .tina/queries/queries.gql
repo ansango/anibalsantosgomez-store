@@ -8,3 +8,35 @@ query contentQuery($relativePath: String!) {
     ...PageParts
   }
 }
+
+query productQuery($relativePath: String!) {
+  ...LayoutQueryFragment
+  product(relativePath: $relativePath) {
+    ...ProductParts
+  }
+}
+
+query productsPublishedQuery {
+  productConnection(filter: { isPublished: { eq: true } }) {
+    edges {
+      node {
+        title
+        description
+        cover
+        camera
+        film
+        id
+        publishedAt
+        isPublished
+        seo {
+          title
+          description
+        }
+        isAvailable
+        _sys {
+          filename
+        }
+      }
+    }
+  }
+}
