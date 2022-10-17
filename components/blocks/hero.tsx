@@ -5,7 +5,7 @@ import { Section } from "../util/section";
 import { useTheme } from "../layout";
 import { monoBgColorsBlur, monoTextColors, primaryTextColors } from "../styles";
 
-import { ImageSerie, type ImageProps } from "../util/image";
+import { type ImageProps } from "../util/image";
 import { Template } from "../../.tina/schema";
 import { formatDate } from "../../lib/utils";
 

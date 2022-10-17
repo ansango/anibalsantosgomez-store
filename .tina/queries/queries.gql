@@ -23,9 +23,9 @@ query productsPublishedQuery {
         title
         description
         cover
-        camera
         film
         id
+        price
         publishedAt
         isPublished
         seo {

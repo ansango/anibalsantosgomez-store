@@ -1,7 +1,7 @@
 import { Template } from "../../.tina/schema";
 import img from "../../public/1.jpg";
 import { Container } from "../util/container";
-import { Image } from "../util/image";
+import { ImageGallery } from "../util/image";
 import { Section } from "../util/section";
 import { motion, useAnimation, Variants } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -25,7 +25,7 @@ export const Gallery = () => {
       control.start("hidden");
     }
   }, [control, inView]);
-    console.log(products)
+
   return (
     <Section>
       <Container>
@@ -39,28 +39,39 @@ export const Gallery = () => {
           {products &&
             products.map((product, i) => (
               <Link key={i} passHref href={`/product/${product._sys.filename}`}>
-                <a
-                  className="p-5 2xl:p-10 aspect-square flex items-center justify-center relative overflow-hidden"
-                  style={{
-                    backgroundImage: `url('${img.src}')`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                >
-                  <div className="h-full w-full">
-                    <div className="p-1 bg-white sm:p-2 lg:p-5 h-full">
-                      <Image url={product.cover} />
+                <a className="space-y-2 sm:space-y-3">
+                  <div
+                    className="p-5 2xl:p-10 aspect-square flex items-center justify-center relative"
+                    style={{
+                      backgroundImage: `url('${img.src}')`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                  >
+                    <div className="p-1 bg-white sm:p-2 lg:p-5 shadow-2xl">
+                      <ImageGallery url={product.cover} />
+                    </div>
+                    <div className="hidden md:block opacity-0 hover:opacity-100 absolute h-full w-full transition-opacity duration-700 ease-in-out">
+                      <div className="flex flex-col justify-center h-full relative">
+                        <div className="text-center absolute w-full z-10">
+                          <h3 className="text-xl font-bold text-slate-900">
+                            {product.title}
+                          </h3>
+                          <p className="text-lg text-slate-900">
+                            {product.price} €
+                          </p>
+                        </div>
+                        <div className="absolute w-full h-full bg-slate-50 opacity-80"></div>
+                      </div>
                     </div>
                   </div>
-                  <div className="opacity-0 hover:opacity-100 absolute h-full w-full transition-opacity duration-700 ease-in-out">
-                    <div className="flex flex-col justify-center h-full relative">
-                      <div className="text-center absolute w-full z-10">
-                        <h3 className="text-2xl font-bold text-slate-900">
-                          {product.title}
-                        </h3>
-                      </div>
-                      <div className="absolute w-full h-full bg-slate-50 opacity-80"></div>
-                    </div>
+                  <div className="md:hidden leading-5 sm:leading-6">
+                    <h3 className="text-base sm:text-lg font-bold text-slate-900">
+                      {product.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-900">
+                      {product.price} €
+                    </p>
                   </div>
                 </a>
               </Link>

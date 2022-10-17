@@ -96,13 +96,11 @@ const schema = defineSchema({
           type: "string",
           required: true,
         },
-
         {
-          label: "Camera",
-          name: "camera",
-          type: "string",
+          label: "Price",
+          name: "price",
+          type: "number",
           required: true,
-          options: cameras,
         },
         {
           label: "Film",

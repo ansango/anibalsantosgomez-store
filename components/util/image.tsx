@@ -155,7 +155,7 @@ export const Image: FC<ImageProps> = ({
     <>
       {url ? (
         <motion.span
-          className={`relative flex flex-col items-center justify-center h-full ${
+          className={`relative flex flex-col items-center justify-center ${
             onClick ? "cursor-pointer" : ""
           }`}
           data-tinafield={`${parentField}.image`}
@@ -166,7 +166,7 @@ export const Image: FC<ImageProps> = ({
           onClick={onClick}
         >
           <img
-            className={`object-cover ${centerCn} w-full ${aRatio} h-full ${
+            className={`object-cover ${centerCn} w-full ${aRatio} ${
               onClick &&
               `hover:opacity-80 group-hover:opacity-80 transition-all duration-300`
             }`}
@@ -182,16 +182,11 @@ export const Image: FC<ImageProps> = ({
   );
 };
 
-export const ImageSerie: FC<ImageProps> = ({ alt, url, loading = "eager" }) => {
-  const control = useAnimation();
-  const [ref, inView] = useInView();
-  useEffect(() => {
-    if (inView) {
-      control.start("visible");
-    } else {
-      control.start("hidden");
-    }
-  }, [control, inView]);
+export const ImageGallery: FC<ImageProps> = ({
+  alt,
+  url,
+  loading = "lazy",
+}) => {
   const rawUrl = url.replace("2048x1365.webp", "");
   const srcSet = {
     2048: `${rawUrl}2048x1365.webp`,
@@ -199,28 +194,17 @@ export const ImageSerie: FC<ImageProps> = ({ alt, url, loading = "eager" }) => {
     768: `${rawUrl}768x512.webp`,
     600: `${rawUrl}600x400.webp`,
   };
-  console.log(url)
   return (
-    <motion.span
-      className="flex flex-col items-center justify-center"
-      ref={ref}
-      variants={variants}
-      initial="hidden"
-      animate={control}
-    >
-      <img
-        loading={loading}
-        className="object-cover object-center mx-auto shadow-2xl dark:shadow-black aspect-square"
-        alt={alt}
-        srcSet={`${srcSet[2048]} 2048w, ${srcSet[1024]} 1024w, ${srcSet[768]} 768w, ${srcSet[600]} 600w`}
-        sizes="(max-width: 512px) 600px, (max-width: 600px) 768px, (max-width: 768px) 1024px, 2048px"
-        src={url}
-      />
-    </motion.span>
+    <img
+      loading={loading}
+      className="object-contain object-center mx-auto aspect-square"
+      alt={alt}
+      srcSet={`${srcSet[2048]} 2048w, ${srcSet[1024]} 1024w, ${srcSet[768]} 768w, ${srcSet[600]} 600w`}
+      sizes="(max-width: 512px) 600px, (max-width: 600px) 768px, (max-width: 768px) 1024px, 2048px"
+      src={url}
+    />
   );
 };
-
-
 
 export const ImageMasonry: FC<ImageProps> = ({
   alt,
@@ -232,7 +216,6 @@ export const ImageMasonry: FC<ImageProps> = ({
 }) => {
   const aRatio = aspectRatioCn[aspectRatio] || aspectRatioCn["4/3"];
   const centerCn = objectPositionCn[centerImage] || objectPositionCn["center"];
-
   const rawUrl = url.replace("2048x1365.webp", "");
   const srcSet = {
     2048: `${rawUrl}2048x1365.webp`,
