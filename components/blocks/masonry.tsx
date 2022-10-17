@@ -3,9 +3,10 @@ import { Container } from "../util/container";
 import { aspectRatioCn, ImageMasonry, objectPositionCn } from "../util/image";
 import { Section } from "../util/section";
 import { motion, useAnimation, Variants } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import { FC, useEffect } from "react";
 import { PageBlocksMasonry } from "../../.tina/__generated__/types";
-import { useInView } from "react-intersection-observer";
+
 
 const gapOptionsCn = {
   default: {

@@ -1,6 +1,13 @@
 import React from "react";
 import type { Page } from "../.tina/__generated__/types";
-import { Hero, Content, ContactForm, WrapperContent, Masonry } from "./blocks";
+import {
+  Hero,
+  Content,
+  ContactForm,
+  WrapperContent,
+  Masonry,
+  Gallery,
+} from "./blocks";
 
 export const Blocks = (props: Omit<Page, "id" | "_sys" | "_values">) => {
   return (
@@ -44,6 +51,15 @@ export const Blocks = (props: Omit<Page, "id" | "_sys" | "_values">) => {
                     data-tinafield={`blocks.${i}`}
                   >
                     <Masonry data={block} parentField={`blocks.${i}`} />
+                  </div>
+                );
+              case "PageBlocksGallery":
+                return (
+                  <div
+                    key={i + block.__typename}
+                    data-tinafield={`blocks.${i}`}
+                  >
+                    <Gallery />
                   </div>
                 );
               default:

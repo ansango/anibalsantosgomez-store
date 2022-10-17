@@ -10,8 +10,10 @@ import {
   contactFormSchema,
   heroBlockSchema,
   masonryBlockSchema,
+  galleyBlockSchema,
 } from "../components/blocks/";
 import { iconSchema } from "../components/util/icon";
+import { cameras, films } from "../constants";
 
 import { client } from "./__generated__/client";
 
@@ -32,6 +34,132 @@ const schema = defineSchema({
   },
 
   collections: [
+    {
+      label: "Products",
+      name: "products",
+      path: "content/products",
+      format: "mdx",
+      ui: {},
+      defaultItem: () => ({}),
+      fields: [
+        {
+          name: "seo",
+          label: "SEO",
+          type: "object",
+          fields: [
+            {
+              name: "title",
+              label: "Title",
+              type: "string",
+            },
+            {
+              name: "description",
+              label: "Description",
+              type: "string",
+            },
+          ],
+        },
+        {
+          label: "Sequence",
+          name: "sequence",
+          type: "number",
+          required: true,
+          ui: {
+            validate: (value) => {
+              if (value < 1) {
+                return "Sequence must be greater than 0";
+              }
+            },
+          },
+        },
+        {
+          label: "Title",
+          name: "title",
+          type: "string",
+          required: true,
+        },
+        {
+          label: "Description",
+          name: "description",
+          type: "string",
+          required: true,
+        },
+
+        {
+          label: "Camera",
+          name: "camera",
+          type: "string",
+          required: true,
+          options: cameras,
+        },
+        {
+          label: "Film",
+          name: "film",
+          type: "string",
+          required: true,
+          options: films,
+        },
+        {
+          type: "image",
+          name: "cover",
+          label: "Cover",
+          required: true,
+        },
+        {
+          type: "object",
+          name: "gallery",
+          label: "Gallery",
+          list: true,
+          ui: {
+            itemProps: (item) => {
+              return { label: item?.alt };
+            },
+            defaultItem: {
+              url: "https://source.unsplash.com/random/1",
+              alt: "Image",
+              label: "Image",
+            },
+          },
+          fields: [
+            {
+              type: "string",
+              label: "Label",
+              name: "label",
+            },
+            {
+              name: "url",
+              label: "URL",
+              type: "image",
+            },
+            {
+              name: "alt",
+              label: "Alt Text",
+              type: "string",
+            },
+          ],
+        },
+        {
+          type: "datetime",
+          label: "Published At",
+          name: "publishedAt",
+          ui: {
+            dateFormat: "MMMM DD YYYY",
+            timeFormat: "hh:mm A",
+            defaultValue: new Date().toISOString(),
+          },
+        },
+        {
+          type: "boolean",
+          label: "Is Published",
+          name: "isPublished",
+        },
+        {
+          label: "Is Available",
+          name: "isAvailable",
+          type: "boolean",
+        },
+      ],
+    },
     {
       label: "Pages",
       name: "page",
@@ -69,6 +197,7 @@ const schema = defineSchema({
             heroBlockSchema,
             contactFormSchema,
             masonryBlockSchema,
+            galleyBlockSchema,
           ],
         },
       ],
