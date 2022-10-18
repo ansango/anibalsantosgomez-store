@@ -7,6 +7,7 @@ import FourOhFour from "../404";
 import { motion } from "framer-motion";
 import { Lightbox } from "../../components/layout/lightbox";
 import { NextSeoProps } from "next-seo";
+import { Product } from "../../components/product";
 
 const SeriePage = (props: AsyncReturnType<typeof getStaticProps>["props"]) => {
   const { prev, next, route } = props;
@@ -36,7 +37,7 @@ const SeriePage = (props: AsyncReturnType<typeof getStaticProps>["props"]) => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Hola
+          <Product {...{ title, description, cover }} />
         </motion.div>
       </Layout>
     );
